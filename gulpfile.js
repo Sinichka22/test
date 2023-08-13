@@ -8,18 +8,18 @@ const replace = require("gulp-replace");
 
 // Task to transpile and minify JavaScript
 function minifyJS() {
-	return gulp.src("main.js").pipe(uglify()).pipe(gulp.dest("dist"));
+	return gulp.src("./src/js/main.js").pipe(uglify()).pipe(gulp.dest("dist"));
 }
 
 // Task to minify CSS
 function minifyCSS() {
-	return gulp.src("main.css").pipe(cleanCSS()).pipe(gulp.dest("dist"));
+	return gulp.src("./src/css/style.css").pipe(cleanCSS()).pipe(gulp.dest("dist"));
 }
 
 // Task to optimize HTML
 function optimizeHTML() {
 	return gulp
-		.src("index.html")
+		.src("./src/index.html")
 		.pipe(htmlMin({ collapseWhitespace: true }))
 		.pipe(replace("main.css", "dist/main.css"))
 		.pipe(replace("main.js", "dist/main.js"))
