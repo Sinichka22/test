@@ -1,15 +1,15 @@
 new Vivus(
-	'my-svg',
+	"my-svg",
 	{
-			type: "delayed",
-			duration: 300,
-			start: "autostart",
-			animTimingFunction: Vivus.EASE
+		type: "delayed",
+		duration: 300,
+		start: "autostart",
+		animTimingFunction: Vivus.EASE,
 	},
 	function () {
-			const pathElement = document.querySelector("#my-svg path");
-			if (pathElement) {
-					pathElement.setAttribute("fill", "#F9FAFF");
-			}
+		const pathElement = document.querySelector("#my-svg path");
+		if (pathElement) {
+			pathElement.setAttribute("fill", "#F9FAFF");
+		}
 	}
 );

@@ -2,7 +2,7 @@
   font-family: "PT Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("fonts/AnyConv.com__PTSans-Regular.woff2") format("woff2");
+  src: url("../fonts/AnyConv.com__PTSans-Regular.woff2") format("woff2");
   font-display: swap;
 }
   
@@ -10,7 +10,7 @@
   font-family: "Work Sans";
   font-style: normal;
   font-weight: 300;
-  src: url("fonts/AnyConv.com__WorkSans-Light.woff2") format("woff2");
+  src: url("../fonts/AnyConv.com__WorkSans-Light.woff2") format("woff2");
   font-display: swap;
 }
 
@@ -18,7 +18,7 @@
   font-family: "Work Sans";
   font-style: normal;
   font-weight: 500;
-  src: url("fonts/AnyConv.com__WorkSans-Medium.woff2") format("woff2");
+  src: url("../fonts/AnyConv.com__WorkSans-Medium.woff2") format("woff2");
   font-display: swap;
 }
   
@@ -204,7 +204,7 @@ body {
   border-bottom: 0.7px solid #F2F2F2;
   background-color: transparent;
   width: 235px;
-  background-image: url("img/down-arrow.svg");
+  background-image: url("../img/down-arrow.svg");
   background-repeat: no-repeat;
   background-position: center right 18px;
   background-size: 8px 5px;
@@ -225,7 +225,7 @@ body {
   border-bottom: 0.7px solid #F2F2F2;
   background-color: transparent;
   width: 40px;
-  background-image: url("img/down-arrow.svg");
+  background-image: url("../img/down-arrow.svg");
   background-repeat: no-repeat;
   background-position: center right 0px;
   background-size: 8px 5px;
@@ -240,7 +240,7 @@ body {
   border-bottom: 0.7px solid #F2F2F2;
   background-color: transparent;
   width: 110px;
-  background-image: url("img/down-arrow.svg");
+  background-image: url("../img/down-arrow.svg");
   background-repeat: no-repeat;
   background-position: center right 0px;
   background-size: 8px 5px;
@@ -255,7 +255,7 @@ body {
   border-bottom: 0.7px solid #F2F2F2;
   background-color: transparent;
   width: 60px;
-  background-image: url("img/down-arrow.svg");
+  background-image: url("../img/down-arrow.svg");
   background-repeat: no-repeat;
   background-position: center right 0px;
   background-size: 8px 5px;
@@ -342,7 +342,7 @@ span.control-label:not(:first-child) {
   width: 12px;
   height: 10px;
   content: "";
-  background-image: url("../images/tick.svg");
+  background-image: url("../img/tick.svg");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -410,10 +410,7 @@ span.control-label:not(:first-child) {
   display: none;
 }
 
-/*
-css for registered
-*/
-
+/*css for registered*/
 .form-container__registered {
   display: flex;
   flex-direction: column;
@@ -427,10 +424,7 @@ css for registered
   margin-left: 19px;
 }
 
-/*
-анимация
-*/
-
+/*анимация*/
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -619,91 +613,6 @@ responsive
   }
 }
 
-/*
-@media screen and (max-width: 768px) {
-  .page-container {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .form-title {
-    height: auto;
-    width: 100%;
-  }
-
-  .title {
-    writing-mode: horizontal-tb;
-    transform: none;
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-  }
-
-  .form-container {
-    width: 100%;
-  }
-
-  .form-container__inform {
-    width: 100%;
-  }
-
-  .form__list {
-    grid-template-columns: 1fr;
-  }
-
-  .form-item:nth-child(even) {
-    margin-left: 0;
-  }
-
-  .form__button {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .page-container {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .form-title {
-    height: auto;
-    width: 100%;
-  }
-
-  .title {
-    writing-mode: horizontal-tb;
-    transform: none;
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-  }
-
-  .form-container {
-    width: 100%;
-  }
-
-  .form-container__inform {
-    width: 100%;
-  }
-
-  .form__list {
-    grid-template-columns: 1fr;
-  }
-
-  .form-item:nth-child(even) {
-    margin-left: 0;
-  }
-
-  .form__button {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-}
-*/
-
 .form-container__registered {
   display: none;
 }
@@ -715,7 +624,6 @@ responsive
 .form-item.error .form__nationality--select{
   border-color: red;
 }
-
 
 .form-item.error .form__gender-group{
   border-color: red;
@@ -737,8 +645,4 @@ responsive
 .form-item.error .form__label::after {
   content: "*";
   color: red;
-}
-
-/*.form__list li:not(:first-child) {
-  display: none;
 }

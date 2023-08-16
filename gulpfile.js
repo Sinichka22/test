@@ -1,60 +1,57 @@
-const gulp = require("gulp");
-const babel = require("gulp-babel");
-//const uglify = require('gulp-uglify');
-const uglify = require("gulp-terser");
-const cleanCSS = require("gulp-clean-css");
-const htmlMin = require("gulp-htmlmin");
-const replace = require("gulp-replace");
-const jsonMinify = require("gulp-jsonminify");
+import gulp from "gulp";
+import babel from "gulp-babel";
+import uglify from "gulp-terser";
+import cleanCSS from "gulp-clean-css";
+import htmlMin from "gulp-htmlmin";
+import replace from "gulp-replace";
+import jsonMinify from 'gulp-json-minify';
+import imagemin from "gulp-imagemin"; // Importing imagemin using ES module syntax
 
 // Task to transpile and minify JavaScript
-function minifyJS() {
-	return gulp
-	.src("./src/js/*.js")
-	.pipe(uglify())
-	.pipe(gulp.dest("dist/js"));
+export function minifyJS() {
+  return gulp.src("./src/js/*.js").pipe(uglify()).pipe(gulp.dest("dist/js"));
 }
 
 // Task to minify CSS
-function minifyCSS() {
-	return gulp
-	.src("./src/css/style.css")
-	.pipe(cleanCSS())
-	.pipe(gulp.dest("dist/css"));
+export function minifyCSS() {
+  return gulp
+    .src("./src/css/style.css")
+    .pipe(cleanCSS())
+    .pipe(gulp.dest("dist/css"));
 }
 
 // Task to optimize HTML
-function optimizeHTML() {
-	return gulp
-		.src("./src/index.html")
-		.pipe(htmlMin({ collapseWhitespace: true }))
-/*		.pipe(replace("style.css", "dist/css/style.css"))
-		.pipe(replace("main.js", "dist/js/main.js"))
-		.pipe(replace("vivus.js", "dist/js/vivus.js"))*/
-		.pipe(gulp.dest("dist"));
+export function optimizeHTML() {
+  return gulp
+    .src("./src/index.html")
+    .pipe(htmlMin({ collapseWhitespace: true }))
+    .pipe(gulp.dest("dist"));
 }
 
 // Task to copy and minify fonts
-function minifyFonts() {
-	return gulp
-	.src("./src/fonts/*")
-	.pipe(gulp.dest("dist/fonts"));
+export function minifyFonts() {
+  return gulp.src("./src/fonts/*").pipe(gulp.dest("dist/fonts"));
 }
 
 // Task to copy and minify JSON files
-function minifyJSON() {
-	return gulp.src("./src/json/*.json")
-		.pipe(jsonMinify())
-		.pipe(gulp.dest("dist/json"));
+export function minifyJSON() {
+  return gulp
+    .src("./src/json/*.json")
+    .pipe(jsonMinify())
+    .pipe(gulp.dest("dist/json"));
 }
 
-// Task to copy and minify node_modules (be cautious with this)
-function minifyNodeModules() {
-	return gulp
-	.src("./node_modules/**/*")
-	.pipe(gulp.dest("dist/node_modules"));
+// Task to minimize images
+export function minimizeImages() {
+  return gulp.src("./src/img/*").pipe(imagemin()).pipe(gulp.dest("dist/img"));
 }
 
 // Default task to run all tasks in sequence
-gulp.task("default", gulp.series(minifyJS, minifyCSS, optimizeHTML, minifyFonts, minifyJSON, minifyNodeModules));
-
+export default gulp.series(
+  minifyJS,
+  minifyCSS,
+  optimizeHTML,
+  minifyFonts,
+  minifyJSON,
+  minimizeImages
+);
