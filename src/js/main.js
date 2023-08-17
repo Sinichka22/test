@@ -125,7 +125,7 @@ form.addEventListener("submit", function (event) {
 	};
 	
 	//
-	fetch("./server-ok.json", { 
+	fetch("../json/server-ok.json", { 
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
