@@ -12,14 +12,8 @@ const confirmInput = document.getElementById("confirm");
 const button = document.getElementById("form-button");
 const formItems = document.querySelectorAll(".form-item");
 const formItemGender = document.querySelector(".form__gender-item");
-
-// Button shaking on form submission failure
-function shakeButton() {
-	button.classList.add("shake");
-	setTimeout(function () {
-		button.classList.remove("shake");
-	}, 500);
-}
+//Set the index of the currently displayed field
+let currentIndex = 0;
 
 // Form submission logic
 form.addEventListener("submit", function (event) {
@@ -38,7 +32,7 @@ form.addEventListener("submit", function (event) {
 	const confirm = confirmInput.value;
 
 	let isError = false;
-	
+
 	if (firstName === "") {
 		showError(firstNameInput, "Please enter your first name");
 		isError = true;
@@ -130,8 +124,8 @@ form.addEventListener("submit", function (event) {
 		confirm: confirm,
 	};
 	
-	
-	fetch("./server-ok.json", {
+	//
+	fetch("./server-ok.json", { 
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -146,11 +140,36 @@ form.addEventListener("submit", function (event) {
 			// Resets the entered form data
 			form.reset();
 		})
-
 		.catch((error) => {
 			alert("Error submitting the form. Please try again later.");
 		});
 });
+
+//Displaying the first field on page load
+showField(currentIndex);
+
+//Add change and blur event handlers for fields
+for (let i = 0; i < formItems.length; i++) {
+	const inputsArr = formItems[i].querySelectorAll(".content");
+	for (let j = 0; j < inputsArr.length; j++) {
+		const choiceOfBehavior =
+			inputsArr[j].name == "gender-group" ? "change" : "blur";
+
+		inputsArr[j].addEventListener(choiceOfBehavior, function (e) {
+			const parentElement = e.target.closest(".form-item");
+			let content = true;
+			const contentArray = parentElement.querySelectorAll(".content");
+			for (let n = 0; n < contentArray.length; n++) {
+				content = content && contentArray[n].value.trim() !== "";
+			}
+			//If the current field is filled, show the next field
+			if (content && parentElement.dataset.next > currentIndex) {
+				currentIndex = parentElement.dataset.next;
+				showField(currentIndex);
+			}
+		});
+	}
+}
 
 // Function to display error
 function showError(inputElement, errorMessage) {
@@ -162,6 +181,7 @@ function showError(inputElement, errorMessage) {
 	errorField.textContent = errorMessage;
 	parentElement.classList.add("error");
 }
+
 // Function to hide error
 function hideError(inputElement) {
 	const parentElement = inputElement.closest(".form-item");
@@ -172,7 +192,7 @@ function hideError(inputElement) {
 
 // Function to get the selected gender
 function getSelectedGender() {
-	for (const genderInput of genderInputs) {
+	for (let genderInput of genderInputs) {
 		if (genderInput.checked) {
 			return genderInput;
 		}
@@ -198,45 +218,17 @@ function validPassword(password) {
 	return passwordPattern.test(password);
 }
 
-//Set the index of the currently displayed field
-let currentIndex = 0;
-
-//Function for field appearance
 function showField(index) {
 	for (let i = 0; i < formItems.length; i++) {
-		hideError(formItems[i]);
-		if (i <= index) {
-			formItems[i].style.display = "block";
-		} else {
-			formItems[i].style.display = "none";
-		}
+			hideError(formItems[i]);
+			formItems[i].style.display = (i <= index ? "block" : "none");
 	}
 }
 
-//Displaying the first field on page load
-showField(currentIndex);
-
-//Add change and blur event handlers for fields
-for (let i = 0; i < formItems.length; i++) {
-	const inputsArr = formItems[i].querySelectorAll(".content");
-	//
-	for (let j = 0; j < inputsArr.length; j++) {
-		const choiceOfBehavior =
-			inputsArr[j].name == "gender-group" ? "change" : "blur";
-
-		inputsArr[j].addEventListener(choiceOfBehavior, function (e) {
-			const parentElement = e.target.closest(".form-item");
-			let content = true;
-			const contentArray = parentElement.querySelectorAll(".content");
-			for (let n = 0; n < contentArray.length; n++) {
-				//const contentElEmpty = contentArray.some(contentEmpty);
-				content = content && contentArray[n].value.trim() !== "";
-			}
-			//If the current field is filled, show the next field
-			if (content && parentElement.dataset.next > currentIndex) {
-				currentIndex = parentElement.dataset.next;
-				showField(currentIndex);
-			}
-		});
-	}
+// Button shaking on form submission failure
+function shakeButton() {
+	button.classList.add("shake");
+	setTimeout(function () {
+		button.classList.remove("shake");
+	}, 500);
 }
