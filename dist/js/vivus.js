@@ -1,0 +1,1 @@
+new Vivus("my-svg",{type:"delayed",duration:300,start:"autostart",animTimingFunction:Vivus.EASE},(function(){const t=document.querySelector("#my-svg path");t&&t.setAttribute("fill","#F9FAFF")}));
